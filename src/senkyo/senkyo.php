@@ -59,6 +59,8 @@ class senkyo extends PluginBase implements Listener{
             
             default:
               $sender->sendMessage("[§b選挙§f] onかoffかを選択してください");
+              return true;
+              break;
           }
         }else{
           $sender->sendMessage("[§b選挙§f] onかoffか選択してください");
