@@ -112,15 +112,15 @@ class senkyo extends PluginBase implements Listener{
                   $kazu = $this->rikkouho->get($name);
                   $kaz = $kazu + 1;
                   if($this->yuuken->get($sender->getName()) == 0){
-                    $date = $args[0];
                     $this->rikkouho->set($name,$kaz);
                     $this->rikkouho->save();
                     $sender->sendMessage("§e【選挙】 >>> ".$name."§a さんに投票しました。");
                     $this->yuuken->set($sender->getName(),1);
                     $this->yuuken->save();
                     $sender->sendMessage("§e【選挙】 >>> もう1人にも投票できます。");
+		    $date = $name;
                   }else{
-                    if($name == $date){
+                    if($args[0] == $date){
                       $sender->sendMessage("§e【選挙】 >>> §c同じ人には投票できません。");
                     }else{
                       $this->rikkouho->set($name,$kaz);
