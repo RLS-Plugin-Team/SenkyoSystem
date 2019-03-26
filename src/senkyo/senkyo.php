@@ -34,11 +34,11 @@ class senkyo extends PluginBase implements Listener{
   public function onJoin(PlayerJoinEvent $ev){
     $player = $ev->getPlayer();
     if($this->botan->get("senkyo") == "on"){
-      $player->sendMessage("[§b選挙§f] §a現在投票期間中です。/senkyos で立候補者を確認しましょう.");
+      $player->sendMessage("§e【選挙】 >>> §b現在投票期間中です。 §e/senkyos §bで立候補者を確認できます。");
     }
   }
   
-  public function onCommand(CommandSender $sender, Command $command,$lavel, array $args){
+	public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
     switch($command->getName()){
       case "senkyo":
         if(isset($args[0])){
@@ -46,24 +46,24 @@ class senkyo extends PluginBase implements Listener{
             case "on":
               $this->botan->set("senkyo","on");
               $this->botan->save();
-              $this->getServer()->broadcastMessage("[§b選挙§f] 選挙が開始されました");
+              $this->getServer()->broadcastMessage("§b[運営]: §a選挙が開始されました。");
               return true;
               break;
             
             case "off":
               $this->botan->set("senkyo","off");
               $this->botan->save();
-              $this->getServer()->broadcastMessage("[§b選挙§f] 選挙がおわりました");
+              $this->getServer()->broadcastMessage("§b[運営]: §a選挙が終了しました。");
               return true;
               break;
             
             default:
-              $sender->sendMessage("[§b選挙§f] onかoffかを選択してください");
+              $sender->sendMessage("§e【選挙】 >>> onかoffかを選択してください。");
               return true;
               break;
           }
         }else{
-          $sender->sendMessage("[§b選挙§f] onかoffか選択してください");
+          $sender->sendMessage("§e【選挙】 >>> onかoffか選択してください。");
         }
         return true;
         break;
@@ -72,14 +72,14 @@ class senkyo extends PluginBase implements Listener{
         if($this->botan->get("senkyo") == "on"){
           $name = $sender->getName();
           if($this->rikkouho->exists($name)){
-            $sender->sendMessage("[§b選挙§f] あなたはすでに立候補しています");
+            $sender->sendMessage("§e【選挙】 >>> §fあなたはすでに立候補しています。");
           }else{
             $this->rikkouho->set($name,0);
             $this->rikkouho->save();
-            $sender->sendMessage("[§b選挙§f] 立候補しました");
+            $sender->sendMessage("§e【選挙】 >>> §a立候補しました。");
           }
         }else{
-          $sender->sendMessage("[§b選挙§f] 現在選挙は行っておりません");
+          $sender->sendMessage("§e【選挙】 >>> §f現在選挙は行っておりません。");
         }
         return true;
         break;
@@ -90,12 +90,12 @@ class senkyo extends PluginBase implements Listener{
           if($this->rikkouho->exists($name)){
             $this->rikkouho->remove($name);
             $this->rikkouho->save();
-            $sender->sendMessage("[§b選挙§f] 立候補を取り下げました");
+            $sender->sendMessage("§e【選挙】 >>> §a立候補を取り下げました。");
           }else{
-            $sender->sendMessage("[§b選挙§f] あなたは立候補していません");
+            $sender->sendMessage("§e【選挙】 >>> §fあなたは立候補していません。");
           }
         }else{
-          $sender->sendMessage("[§b選挙§f] 現在選挙は行っておりません");
+          $sender->sendMessage("§e【選挙】 >>> §f現在選挙は行っておりません。");
         }
         return true;
         break;
@@ -106,7 +106,7 @@ class senkyo extends PluginBase implements Listener{
             if(isset($args[0])){
               $name = $args[0];
               if($name == $sender->getName()){
-                $sender->sendMessage("[§b選挙§f] 自分に投票することは出来ません");
+                $sender->sendMessage("§e【選挙】 >>> §c自分に投票することはできません。");
               }else{
                 if($this->rikkouho->exists($name)){
                   $kazu = $this->rikkouho->get($name);
@@ -115,33 +115,33 @@ class senkyo extends PluginBase implements Listener{
                     $date = $args[0];
                     $this->rikkouho->set($name,$kaz);
                     $this->rikkouho->save();
-                    $sender->sendMessage("[§b選挙§f] ".$name."さんに投票しました");
+                    $sender->sendMessage("§e【選挙】 >>> ".$name."§a さんに投票しました。");
                     $this->yuuken->set($sender->getName(),1);
                     $this->yuuken->save();
-                    $this->sendMessage("[§b選挙§f] もう1人にも投票できます");
+                    $this->sendMessage("§e【選挙】 >>> もう1人にも投票できます。");
                   }else{
                     if($name == $date){
-                      $sender->sendMessage("[§b選挙§f] 同じ人には投票できません");
+                      $sender->sendMessage("§e【選挙】 >>> §c同じ人には投票できません。");
                     }else{
                       $this->rikkouho->set($name,$kaz);
                       $this->rikkouho->save();
-                      $sender->sendMessage("[§b選挙§f] ".$name."さんに投票しました");
+                      $sender->sendMessage("§e【選挙】 >>> ".$name."§a さんに投票しました。");
                       $this->yuuken->set($sender->getName(),2);
                       $this->yuuken->save();
                     }
                   }
                 }else{
-                  $sender->sendMessage("[§b選挙§f] その人は立候補していないようです");
+                  $sender->sendMessage("§e【選挙】 >>> §cその人は立候補していません。");
                 }
               }
             }else{
-              $sender->sendMessage("[§b選挙§f] 立候補者から一人に投票してください");
+              $sender->sendMessage("§e【選挙】 >>> §f立候補者から一人に投票してください。");
             }
           }else{
-            $sender->sendMessage("[§b選挙§f] あなたは既に投票しています");
+            $sender->sendMessage("§e【選挙】 >>> §fあなたはすでに投票しています。");
           }
         }else{
-          $sender->sendMessage("[§b選挙§f] 現在選挙は行っておりません");
+          $sender->sendMessage("§e【選挙】 >>> §f現在選挙は行っておりません。");
         }
         return true; 
         break;
@@ -170,23 +170,23 @@ class senkyo extends PluginBase implements Listener{
             if($sender->isOp()){
               $data = $this->rikkouho->getAll(true);
               foreach($data as $player){
-                $sender->sendMessage("[§b選挙§f] ".$player."§6:§a".$this->rikkouho->get($player)."");
+                $sender->sendMessage("§e【選挙】 >>> ".$player." ");
               }
             }else{
               $data = $this->rikkouho->getAll(true);
               foreach($data as $player){
-                $sender->sendMessage("[§a立候補者§f] ".$player."");
+                $sender->sendMessage("[§a立候補者§f] ".$player." ");
               }
-              $sender->sendMessage("[§b選挙§f] /senkyotで投票しましょう。");
+              $sender->sendMessage("§e【選挙】 >>> /senkyotで投票しましょう。");
             }
           }else{
             $data = $this->rikkouho->getAll(true);
             foreach($data as $player){
-              $sender->sendMessage("[§b結果§f] ".$player."§6:§a".$this->rikkouho->get($player)."");
+              $sender->sendMessage("[§b結果§f]: §e".$player."§b: §a".$this->rikkouho->get($player)."票 ");
             }
           }
         }else{
-          $sender->sendMessage("[§b選挙§f] まだ立候補者が居ないようです");
+          $sender->sendMessage("§e【選挙】 >>> まだ立候補者はいません。");
         }          
         return true;
         break;

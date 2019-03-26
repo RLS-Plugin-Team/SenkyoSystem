@@ -1,25 +1,25 @@
 name: SenkyoSystem
 main: senkyo\senkyo
 version: 1.0.0
-api: 3.0.0
+api: 3.7.0
 load: POSTWORLD
 author: soradore
 authors: [narapon]
 description: touhyou senkyo plugin
 commands:
  senkyo:
-  description: "選挙を開始、終了します"
+  description: "<OP>選挙を開始、終了"
   permission: "senkyo.cmd" 
  senkyori:
-  description: "立候補します"
+  description: "立候補する"
  senkyode:
   description: "立候補を取り下げます"
  senkyot:
-  description: "投票します"
+  description: "投票する"
  senkyos:
   description: "立候補者一覧"
  senkyodelall:
-  description: "選挙のデータすべてを削除します"
+  description: "<OP>選挙のデータ削除"
   permission: "delall.cmd"
   
 permissions:
