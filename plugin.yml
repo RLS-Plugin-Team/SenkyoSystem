@@ -10,8 +10,10 @@ commands:
  senkyo:
   description: "選挙を開始、終了します"
   permission: "senkyo.cmd" 
- senkyor:
+ senkyori:
   description: "立候補します"
+ senkyode:
+  description: "立候補を取り下げます"
  senkyot:
   description: "投票します"
  senkyos:
