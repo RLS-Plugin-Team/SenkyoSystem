@@ -102,40 +102,36 @@ class senkyo extends PluginBase implements Listener{
       
       case "senkyot":
         if($this->botan->get("senkyo") == "on"){
-          if($this->yuuken->get($sender->getName()) == 0 or $this->yuuken->get($sender->getName()) == 1){
-            if(isset($args[0])){
-              $name = $args[0];
-              if($name == $sender->getName()){
+          if($this->yuuken->get($sender->getName()) == 0){
+            if(isset($args[0]) && isset($args[1]){
+              $name1 = $args[0];
+	      $name2 = $args[1];
+              if($name1 == $sender->getName()){
                 $sender->sendMessage("§e【選挙】 >>> §c自分に投票することはできません。");
+	      }elseif($name2 == $sender->getName()){
+		$sender->sendMessage("§e【選挙】 >>> §c自分に投票することはできません。");
+	      }elseif($name1 == $name2){
+		$sender->sendMessage("§e【選挙】 >>> §c同じ人には投票できません。");
               }else{
-                if($this->rikkouho->exists($name)){
-                  $kazu = $this->rikkouho->get($name);
-                  $kaz = $kazu + 1;
-                  if($this->yuuken->get($sender->getName()) == 0){
-                    $this->rikkouho->set($name,$kaz);
-                    $this->rikkouho->save();
-                    $sender->sendMessage("§e【選挙】 >>> ".$name."§a さんに投票しました。");
-                    $this->yuuken->set($sender->getName(),1);
-                    $this->yuuken->save();
-                    $sender->sendMessage("§e【選挙】 >>> もう1人にも投票できます。");
-		    $date = $name;
-                  }else{
-                    if($args[0] == $date){
-                      $sender->sendMessage("§e【選挙】 >>> §c同じ人には投票できません。");
-                    }else{
-                      $this->rikkouho->set($name,$kaz);
-                      $this->rikkouho->save();
-                      $sender->sendMessage("§e【選挙】 >>> ".$name."§a さんに投票しました。");
-                      $this->yuuken->set($sender->getName(),2);
-                      $this->yuuken->save();
-                    }
-                  }
-                }else{
-                  $sender->sendMessage("§e【選挙】 >>> §cその人は立候補していません。");
+                if(!$this->rikkouho->exists($name1)){
+		  $sender->sendMessage("§e【選挙】 >>> §c".$name1."は立候補していません。");
+		}elseif($this->rikkouho->existe($name2)){
+		  $sender->sendMessage("§e【選挙】 >>> §c".$name2."は立候補していません。");
+		}else{
+	          $kazu1 = $this->rikkouho->get($name1);
+                  $kaz1 = $kazu1 + 1;
+		  $kazu2 = $this->rikkouho->get($name2);
+		  $kaz2 = $kazu2 + 1;
+                  $this->rikkouho->set($name1,$kaz1);
+		  $this->rikkouho->set($name2,$kaz2);
+                  $this->rikkouho->save();
+                  $sender->sendMessage("§e【選挙】 >>> ".$name1."§a さんと".$name2."さんに投票しました。");
+                  $this->yuuken->set($sender->getName(),1);
+                  $this->yuuken->save();
                 }
               }
             }else{
-              $sender->sendMessage("§e【選挙】 >>> §f立候補者から一人に投票してください。");
+              $sender->sendMessage("§e【選挙】 >>> §f立候補者から2人を投票してください。");
             }
           }else{
             $sender->sendMessage("§e【選挙】 >>> §fあなたはすでに投票しています。");
