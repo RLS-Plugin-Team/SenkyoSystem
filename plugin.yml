@@ -9,20 +9,17 @@ description: touhyou senkyo plugin
 commands:
  senkyo:
   description: "選挙を開始、終了します"
-  permission: "senkyo.cmd"
-  
+  permission: "senkyo.cmd" 
  senkyor:
   description: "立候補します"
-
  senkyot:
   description: "投票します"
-
  senkyos:
   description: "立候補者一覧"
-
  senkyodelall:
   description: "選挙のデータすべてを削除します"
   permission: "delall.cmd"
+  
 permissions:
  senkyo.cmd:
   default: op
