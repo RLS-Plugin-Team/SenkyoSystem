@@ -83,6 +83,22 @@ class senkyo extends PluginBase implements Listener{
         }
         return true;
         break;
+        
+      case "senkyode":
+        if($this->botan->get("senkyo") == "on"){
+          $name = $sender->getName();
+          if($this->rikkouho->exists($name)){
+            $this->rikkouho->remove($name);
+            $this->rikkouho->save();
+            $sender->sendMessage("[§b選挙§f] 立候補を取り下げました");
+          }else{
+            $sender->sendMessage("[§b選挙§f] あなたは立候補していません");
+          }
+        }else{
+          $sender->sendMessage("[§b選挙§f] 現在選挙は行っておりません");
+        }
+        return true;
+        break;
       
       case "senkyot":
         if($this->botan->get("senkyo") == "on"){
