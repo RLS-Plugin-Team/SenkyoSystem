@@ -115,7 +115,7 @@ class senkyo extends PluginBase implements Listener{
               }else{
                 if(!$this->rikkouho->exists($name1)){
 		  $sender->sendMessage("§e【選挙】 >>> §c".$name1."は立候補していません。");
-		}elseif($this->rikkouho->exists($name2)){
+		}elseif(!$this->rikkouho->exists($name2)){
 		  $sender->sendMessage("§e【選挙】 >>> §c".$name2."は立候補していません。");
 		}else{
 	          $kazu1 = $this->rikkouho->get($name1);
