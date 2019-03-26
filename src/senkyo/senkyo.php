@@ -38,7 +38,7 @@ class senkyo extends PluginBase implements Listener{
     }
   }
   
-	public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
+  public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
     switch($command->getName()){
       case "senkyo":
         if(isset($args[0])){
