@@ -103,7 +103,7 @@ class senkyo extends PluginBase implements Listener{
       case "senkyot":
         if($this->botan->get("senkyo") == "on"){
           if($this->yuuken->get($sender->getName()) == 0){
-            if(isset($args[0]) && isset($args[1]){
+            if(isset($args[0]) && isset($args[1])){
               $name1 = $args[0];
 	      $name2 = $args[1];
               if($name1 == $sender->getName()){
