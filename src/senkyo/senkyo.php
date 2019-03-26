@@ -118,7 +118,7 @@ class senkyo extends PluginBase implements Listener{
                     $sender->sendMessage("§e【選挙】 >>> ".$name."§a さんに投票しました。");
                     $this->yuuken->set($sender->getName(),1);
                     $this->yuuken->save();
-                    $this->sendMessage("§e【選挙】 >>> もう1人にも投票できます。");
+                    $sender->sendMessage("§e【選挙】 >>> もう1人にも投票できます。");
                   }else{
                     if($name == $date){
                       $sender->sendMessage("§e【選挙】 >>> §c同じ人には投票できません。");
