@@ -68,7 +68,7 @@ class senkyo extends PluginBase implements Listener{
         return true;
         break;
       
-      case "senkyor":
+      case "senkyori":
         if($this->botan->get("senkyo") == "on"){
           $name = $sender->getName();
           if($this->rikkouho->exists($name)){
