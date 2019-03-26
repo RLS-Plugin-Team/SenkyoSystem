@@ -125,7 +125,7 @@ class senkyo extends PluginBase implements Listener{
                   $this->rikkouho->set($name1,$kaz1);
 		  $this->rikkouho->set($name2,$kaz2);
                   $this->rikkouho->save();
-                  $sender->sendMessage("§e【選挙】 >>> ".$name1."§a さんと".$name2."さんに投票しました。");
+                  $sender->sendMessage("§e【選挙】 >>> §f".$name1."さん§aと§f".$name2."さん§aに投票しました。");
                   $this->yuuken->set($sender->getName(),1);
                   $this->yuuken->save();
                 }
